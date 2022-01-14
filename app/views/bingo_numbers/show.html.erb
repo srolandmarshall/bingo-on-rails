@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @bingo_number %>
+
+<div>
+  <%= link_to "Edit this bingo number", edit_bingo_number_path(@bingo_number) %> |
+  <%= link_to "Back to bingo numbers", bingo_numbers_path %>
+
+  <%= button_to "Destroy this bingo number", @bingo_number, method: :delete %>
+</div>

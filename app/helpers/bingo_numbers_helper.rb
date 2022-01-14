@@ -1,0 +1,2 @@
+module BingoNumbersHelper
+end

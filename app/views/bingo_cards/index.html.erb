@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Bingo cards</h1>
+
+<div id="bingo_cards">
+  <% @bingo_cards.each do |bingo_card| %>
+    <%= render bingo_card %>
+    <p>
+      <%= link_to "Show this bingo card", bingo_card %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New bingo card", new_bingo_card_path %>

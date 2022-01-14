@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  bingo_card: one
+  letter: MyString
+  number: 1
+
+two:
+  bingo_card: two
+  letter: MyString
+  number: 1
