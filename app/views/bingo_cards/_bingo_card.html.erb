@@ -1,19 +1,19 @@
 <div id="<%= dom_id bingo_card %>" class="col-sm-4">
-  <table class="table">
-    <thead>
+  <table class="table table-bordered">
+    <thead class="table-dark">
       <tr>
-        <th>B</th>
-        <th>I</th>
-        <th>N</th>
-        <th>G</th>
-        <th>O</th>
+        <th class="text-center">B</th>
+        <th class="text-center">I</th>
+        <th class="text-center">N</th>
+        <th class="text-center">G</th>
+        <th class="text-center">O</th>
       </tr>
     </thead>
     <tbody>
       <% bingo_card.board_array.each do |row| %>
         <tr>
           <% row.each do |number| %>
-            <td>
+            <td class="text-center">
               <%= number %>
             </td>
           <% end %>
