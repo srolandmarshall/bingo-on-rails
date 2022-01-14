@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_14_003049) do
+ActiveRecord::Schema.define(version: 2022_01_14_032351) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,19 +19,20 @@ ActiveRecord::Schema.define(version: 2022_01_14_003049) do
     t.boolean "winner", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "bingo_numbers_id", null: false
-    t.index ["bingo_numbers_id"], name: "index_bingo_cards_on_bingo_numbers_id"
+  end
+
+  create_table "bingo_cards_numbers", id: false, force: :cascade do |t|
+    t.bigint "bingo_card_id", null: false
+    t.bigint "bingo_number_id", null: false
+    t.index ["bingo_card_id", "bingo_number_id"], name: "index_bingo_cards_numbers_on_bingo_card_id_and_bingo_number_id"
+    t.index ["bingo_number_id", "bingo_card_id"], name: "index_bingo_cards_numbers_on_bingo_number_id_and_bingo_card_id"
   end
 
   create_table "bingo_numbers", force: :cascade do |t|
-    t.bigint "bingo_card_id"
-    t.string "letter", null: false
-    t.integer "number", null: false
+    t.integer "number"
+    t.string "letter"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["bingo_card_id"], name: "index_bingo_numbers_on_bingo_card_id"
   end
 
-  add_foreign_key "bingo_cards", "bingo_numbers", column: "bingo_numbers_id"
-  add_foreign_key "bingo_numbers", "bingo_cards"
 end

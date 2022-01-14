@@ -1,0 +1,32 @@
+<%= form_with(model: bingo_number) do |form| %>
+  <% if bingo_number.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(bingo_number.errors.count, "error") %> prohibited this bingo_number from being saved:</h2>
+
+      <ul>
+        <% bingo_number.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :bingo_card_id, style: "display: block" %>
+    <%= form.text_field :bingo_card_id %>
+  </div>
+
+  <div>
+    <%= form.label :letter, style: "display: block" %>
+    <%= form.text_field :letter %>
+  </div>
+
+  <div>
+    <%= form.label :number, style: "display: block" %>
+    <%= form.number_field :number %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

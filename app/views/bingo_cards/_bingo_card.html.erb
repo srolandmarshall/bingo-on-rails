@@ -1,12 +1,24 @@
 <div id="<%= dom_id bingo_card %>">
-  <p>
-    <strong>Winner:</strong>
-    <%= bingo_card.winner %>
-  </p>
-
-  <p>
-    <strong>Number:</strong>
-    <%= bingo_card.number_id %>
-  </p>
-
+  <table class="table">
+    <thead>
+      <tr>
+        <th>B</th>
+        <th>I</th>
+        <th>N</th>
+        <th>G</th>
+        <th>O</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% bingo_card.board_array.each do |row| %>
+        <tr>
+          <% row.each do |number| %>
+            <td>
+              <%= number %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>

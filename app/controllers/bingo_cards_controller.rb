@@ -13,6 +13,7 @@ class BingoCardsController < ApplicationController
   # GET /bingo_cards/new
   def new
     @bingo_card = BingoCard.new
+    @bingo_card.pick_numbers
   end
 
   # GET /bingo_cards/1/edit
