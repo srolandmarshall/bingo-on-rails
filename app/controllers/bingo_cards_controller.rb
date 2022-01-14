@@ -14,6 +14,7 @@ class BingoCardsController < ApplicationController
   def new
     @bingo_card = BingoCard.new
     @bingo_card.pick_numbers
+    redirect_to bingo_cards_path, notice: "Bingo card was successfully created."
   end
 
   # GET /bingo_cards/1/edit
