@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2022_01_14_003049) do
   end
 
   create_table "bingo_numbers", force: :cascade do |t|
-    t.bigint "bingo_card_id", null: false
+    t.bigint "bingo_card_id"
     t.string "letter", null: false
     t.integer "number", null: false
     t.datetime "created_at", precision: 6, null: false
