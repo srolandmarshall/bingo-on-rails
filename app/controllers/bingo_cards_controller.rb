@@ -10,17 +10,16 @@ class BingoCardsController < ApplicationController
 
   # GET /bingo_cards/1 or /bingo_cards/1.json
   def show
+    @bingo_card = BingoCard.find(params[:id])
   end
 
   # GET /bingo_cards/new
   def new
     @bingo_card = BingoCard.new
     @bingo_card.pick_numbers
-    @data = @bingo_card.attributes.merge(@bingo_card.board_array_json)
-    puts @data.to_json
     respond_to do |format|
-      format.html { render :show }
-      format.json { render json: @data.to_json }
+      format.html { render partial: 'bingo_cards/bingo_card', locals: { bingo_card: @bingo_card } }
+      format.json { render json: @bingo_card }
     end
   end
 
