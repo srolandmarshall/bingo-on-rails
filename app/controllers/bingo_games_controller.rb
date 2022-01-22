@@ -64,9 +64,8 @@ class BingoGamesController < ApplicationController
 
   # POST /bingo_games/1/draw_number
   def draw_number
-    number = @bingo_game.draw_number
-    response = number ? number.display : "No more numbers available"
-    render plain: response
+    number = @bingo_game.draw_number 
+    render plain: (number ?  number.display : "No more numbers available")
   end
 
   def reset_numbers
