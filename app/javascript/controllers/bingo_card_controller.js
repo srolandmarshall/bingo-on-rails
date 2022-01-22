@@ -17,27 +17,4 @@ export default class extends Controller {
   appendToBingoCards(card_data) {
     this.bingoCardTarget.insertAdjacentHTML('beforeend', card_data);
   }
-
-  numberToLetter(num) {
-    switch (true) {
-      case (num <= 15): {
-        return "B"
-      }
-      case (num <= 30): {
-        return "I"
-      }
-      case (num <= 45): {
-        return "N"
-      }
-      case (num <= 60): {
-        return "G"
-      }
-      case (num <= 75): {
-        return "O"
-      }
-      default: {
-        break;
-      }
-    }
-  }
 }
