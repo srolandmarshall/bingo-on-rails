@@ -3,43 +3,30 @@ import { application } from "./application"
 
 export default class extends Controller {
   
-  static targets = ["bingoNumber"]
+  static targets = ["appendBingoCard", "removeAllBingoCards"]
 
-  click() {
-    console.log("Bingo Card Controller Clicked!")
+  newCard() {
     fetch("/bingo_cards/new", {
       method: "GET",
       headers: {
-        "content-type": "application/json",
-        "accept": "application/json"
-    }}).then(res => res.json())
-      .then(data => this.appendToBingoCards(data));
+        "accept": "text/html"
+    }}).then(res => res.text())
+      .then(html => this.appendToBingoCards(html));
   }
-
+  
   appendToBingoCards(card_data) {
-    console.log(card_data)
+    this.appendBingoCardTarget.insertAdjacentHTML('beforeend', card_data);
   }
 
-  numberToLetter(num) {
-    switch (true) {
-      case (num <= 15): {
-        return "B"
-      }
-      case (num <= 30): {
-        return "I"
-      }
-      case (num <= 45): {
-        return "N"
-      }
-      case (num <= 60): {
-        return "G"
-      }
-      case (num <= 75): {
-        return "O"
-      }
-      default: {
-        break;
-      }
-    }
+  removeAllCards() {
+    this.destroyAllCall();
+    this.removeAllBingoCardsTarget.innerHTML = "";
   }
+
+  destroyAllCall() {
+    fetch("/bingo_cards/destroy_all", {
+      method: "DELETE"
+    });
+  }
+
 }

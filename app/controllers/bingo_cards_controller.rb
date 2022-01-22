@@ -1,5 +1,7 @@
 class BingoCardsController < ApplicationController
   before_action :set_bingo_card, only: %i[ show edit update destroy ]
+  skip_before_action :verify_authenticity_token
+
 
   # GET /bingo_cards or /bingo_cards.json
   def index
@@ -8,17 +10,16 @@ class BingoCardsController < ApplicationController
 
   # GET /bingo_cards/1 or /bingo_cards/1.json
   def show
+    @bingo_card = BingoCard.find(params[:id])
   end
 
   # GET /bingo_cards/new
   def new
     @bingo_card = BingoCard.new
     @bingo_card.pick_numbers
-    @data = @bingo_card.attributes.merge(@bingo_card.board_array_json)
-    puts @data.to_json
     respond_to do |format|
-      format.html
-      format.json { render json: @data.to_json }
+      format.html { render partial: 'bingo_cards/bingo_card', locals: { bingo_card: @bingo_card } }
+      format.json { render json: @bingo_card }
     end
   end
 
@@ -29,6 +30,7 @@ class BingoCardsController < ApplicationController
   def create
     @bingo_card = BingoCard.new
     @bingo_card.pick_numbers
+    @data = @bingo_card.attributes.merge(@bingo_card.board_array_json)
     respond_to do |format|
       if @bingo_card.save
         format.html { redirect_to bingo_cards_path, notice: "Bingo card was successfully created." }
@@ -61,6 +63,10 @@ class BingoCardsController < ApplicationController
       format.html { redirect_to bingo_cards_url, notice: "Bingo card was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def destroy_all
+    BingoCard.destroy_all
   end
 
   private
