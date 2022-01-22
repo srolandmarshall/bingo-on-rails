@@ -16,7 +16,6 @@ export default class extends Controller {
   }
 
   appendToBingoCards(card_data) {
-    console.log("card data class", typeof card_data)
     this.bingoCardTarget.insertAdjacentHTML('beforeend', card_data);
   }
 
