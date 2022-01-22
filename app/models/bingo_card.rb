@@ -1,5 +1,6 @@
 class BingoCard < ApplicationRecord
   has_and_belongs_to_many :bingo_numbers
+  has_and_belongs_to_many :bingo_games
 
   def pick_numbers
     %w(b i n g o).each do |letter|

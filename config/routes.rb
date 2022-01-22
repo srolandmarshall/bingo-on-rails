@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :bingo_games
   resources :bingo_numbers
   resources :bingo_cards do
     collection do
