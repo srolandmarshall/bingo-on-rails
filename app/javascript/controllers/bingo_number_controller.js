@@ -4,7 +4,7 @@ import { application } from "./application"
 export default class extends Controller {
   
   static targets = ["bingoNumber"]
-  click(event) {
+  newNumber(event) {
     fetch(`/bingo_games/${event.target.dataset.gameId}/draw_number`, {
       method: "POST",
       headers: {
@@ -14,6 +14,9 @@ export default class extends Controller {
     .then(data => this.bingoNumberTarget.textContent = data);
   }
 
+  resetNumbers(event) {
+    fetch(`/bingo_games/${event.target.dataset.gameId}/reset_numbers`);
+  }
 
   numberToLetter(num) {
     switch (true) {

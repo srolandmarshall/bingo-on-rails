@@ -7,6 +7,14 @@
     <strong>Cards:</strong>
     <%= bingo_game.bingo_cards.size %>
   </p>
+  <p>
+    <strong>Called Numbers:</strong>
+    <%= bingo_game.bingo_numbers.map { |n| n.display } %>
+  </p>
+  <p>
+    <strong>Possible numbers:</strong>
+    <%= bingo_game.possible_numbers.map { |n| n.display } %>
+  </p>
 
 
 </div>

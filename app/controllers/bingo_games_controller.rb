@@ -1,5 +1,5 @@
 class BingoGamesController < ApplicationController
-  before_action :set_bingo_game, only: %i[ show edit update destroy draw_number ]
+  before_action :set_bingo_game, only: %i[ show edit update destroy draw_number reset_numbers ]
   skip_before_action :verify_authenticity_token
 
 
@@ -11,6 +11,8 @@ class BingoGamesController < ApplicationController
   # GET /bingo_games/1 or /bingo_games/1.json
   def show
     @bingo_cards = @bingo_game.bingo_cards
+    @bingo_numbers = @bingo_game.bingo_numbers
+    @possible_numbers = @bingo_game.possible_numbers
   end
 
   # GET /bingo_games/new
@@ -65,6 +67,10 @@ class BingoGamesController < ApplicationController
     number = @bingo_game.draw_number
     response = number ? number.display : "No more numbers available"
     render plain: response
+  end
+
+  def reset_numbers
+    @bingo_game.reset_numbers
   end
 
   private

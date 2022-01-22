@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :bingo_games do
     member do
       post :draw_number
+      get :reset_numbers
     end
   end
   resources :bingo_numbers
