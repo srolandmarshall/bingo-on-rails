@@ -6,7 +6,6 @@ export default class extends Controller {
   static targets = ["bingoCard"]
 
   click() {
-    console.log("Bingo Card Controller Clicked!")
     fetch("/bingo_cards/new", {
       method: "GET",
       headers: {
