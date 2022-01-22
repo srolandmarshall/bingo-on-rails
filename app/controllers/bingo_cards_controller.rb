@@ -17,7 +17,7 @@ class BingoCardsController < ApplicationController
     @data = @bingo_card.attributes.merge(@bingo_card.board_array_json)
     puts @data.to_json
     respond_to do |format|
-      format.html
+      format.html { render :show }
       format.json { render json: @data.to_json }
     end
   end
@@ -29,6 +29,7 @@ class BingoCardsController < ApplicationController
   def create
     @bingo_card = BingoCard.new
     @bingo_card.pick_numbers
+    @data = @bingo_card.attributes.merge(@bingo_card.board_array_json)
     respond_to do |format|
       if @bingo_card.save
         format.html { redirect_to bingo_cards_path, notice: "Bingo card was successfully created." }

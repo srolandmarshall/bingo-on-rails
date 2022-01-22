@@ -3,21 +3,22 @@ import { application } from "./application"
 
 export default class extends Controller {
   
-  static targets = ["bingoNumber"]
+  static targets = ["bingoCard"]
 
   click() {
     console.log("Bingo Card Controller Clicked!")
     fetch("/bingo_cards/new", {
       method: "GET",
       headers: {
-        "content-type": "application/json",
-        "accept": "application/json"
-    }}).then(res => res.json())
-      .then(data => this.appendToBingoCards(data));
+        "accept": "text/html"
+    }}).then(res => res.text())
+      .then(html => this.appendToBingoCards(html));
   }
 
   appendToBingoCards(card_data) {
-    console.log(card_data)
+    console.log("card data class", typeof card_data)
+    var doc = new DOMParser().parseFromString(card_data, "text/html");
+    this.bingoCardTarget.insertAdjacentHTML('beforeend', card_data);
   }
 
   numberToLetter(num) {
