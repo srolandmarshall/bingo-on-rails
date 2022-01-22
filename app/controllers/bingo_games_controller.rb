@@ -57,15 +57,16 @@ class BingoGamesController < ApplicationController
     @bingo_game.destroy
 
     respond_to do |format|
-      format.html { redirect_to bingo_games_url, notice: "Bingo game was successfully destroyed." }
+      format.html { redirect_to bingo_games_url, notice: 'Bingo game was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   # POST /bingo_games/1/draw_number
   def draw_number
-    number = @bingo_game.draw_number 
-    render plain: (number ?  number.display : "No more numbers available")
+    # draw_number returns a BingoNumber object or nil, if there are no more possible numbers
+    number = @bingo_game.draw_number
+    render plain: (number ? number.display : 'No more numbers available')
   end
 
   def reset_numbers

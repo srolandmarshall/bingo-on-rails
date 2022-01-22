@@ -13,6 +13,7 @@
       <% bingo_card.board_array.each do |row| %>
         <tr>
           <% row.each do |number| %>
+            <%# Stimulus data attributes should replace this ERB logic %>
             <td class="text-center <%= "bg-success" if @bingo_game.bingo_numbers.include?(number) %>">
               <%= number.number %>
             </td>
