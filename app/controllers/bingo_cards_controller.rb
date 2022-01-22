@@ -30,10 +30,18 @@ class BingoCardsController < ApplicationController
   def create
     @bingo_card = BingoCard.new(bingo_card_params)
     @bingo_card.pick_numbers
-    @bingo_game = BingoGame.find(params[:bingo_card][:bingo_game_id]) if params[:bingo_card][:bingo_game_id]
+    locals = { bingo_card: @bingo_card }
+
+    # This is to make the "New Bingo Card" button attach to a game, if desired.
+    # Probably a better way to do this.
+    if params[:bingo_card][:bingo_game_id]
+      @bingo_game = BingoGame.find(params[:bingo_card][:bingo_game_id]) 
+      locals[:bingo_game] = @bingo_game
+    end
+
     respond_to do |format|
       if @bingo_card.save
-        format.html { render partial: 'bingo_cards/bingo_card', locals: { bingo_card: @bingo_card, bingo_game: @bingo_game } }
+        format.html { render partial: 'bingo_cards/bingo_card', locals: locals }
         format.json { render json: @bingo_card }
       else
         format.html { render :new, status: :unprocessable_entity }

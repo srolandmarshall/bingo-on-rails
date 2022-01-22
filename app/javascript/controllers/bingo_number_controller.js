@@ -4,6 +4,10 @@ import { application } from "./application"
 export default class extends Controller {
   
   static targets = ["bingoNumber"]
+
+  // How do you pass arguments to a controller method in Stimulus?
+  // https://github.com/hotwired/stimulus/issues/64
+
   newNumber(event) {
     fetch(`/bingo_games/${event.target.dataset.gameId}/draw_number`, {
       method: "POST",
