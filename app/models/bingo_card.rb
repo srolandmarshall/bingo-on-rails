@@ -1,5 +1,15 @@
 class BingoCard < ApplicationRecord
   has_and_belongs_to_many :bingo_numbers
+  has_and_belongs_to_many :bingo_games
+
+  def initialize(params = {})
+    super()
+    
+    if params[:bingo_game_id]
+      @bingo_game = BingoGame.find(params[:bingo_game_id])  
+      bingo_games << @bingo_game
+    end
+  end
 
   def pick_numbers
     %w(b i n g o).each do |letter|
@@ -14,7 +24,7 @@ class BingoCard < ApplicationRecord
     %w(b i n g o).each do |letter|
       index = 0
       bingo_numbers.where(letter: letter).each do |number|
-        arr[index] << number.number
+        arr[index] << number
         index += 1
       end
     end

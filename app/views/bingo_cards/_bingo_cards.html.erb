@@ -4,13 +4,11 @@
 
 <div data-controller="bingo-card" id="bingo_cards">
   <div data-bingo-card-target="appendBingoCard removeAllBingoCards" class="row">
-  <% BingoCard.all.each do |bingo_card| %>
+  <% @bingo_cards.each do |bingo_card| %>
     <%= render bingo_card %>
   <% end %>
   </div>
-  <button class="btn btn-success" data-action="bingo-card#newCard">
-    New Bingo Card
-  </button>
-  <button class="btn btn-danger" data-action="bingo-card#removeAllCards">Remove All</button>
+  <%= button_tag 'New Bingo Card', data: {"game-id": @bingo_game.id, "action": "bingo-card#newCard"}, class: "btn btn-success" %>
+  <%= button_tag 'Remove All Cards', data: {"game-id": @bingo_game.id, "action": "bingo-card#removeAllCards"}, class: "btn btn-danger" %>
 </div>
 

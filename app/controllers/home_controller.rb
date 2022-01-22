@@ -1,4 +1,6 @@
 class HomeController < ApplicationController
 
-  def index; end
+  def index
+    @bingo_games = BingoGame.all
+  end
 end

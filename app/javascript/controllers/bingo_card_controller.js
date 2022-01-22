@@ -5,12 +5,24 @@ export default class extends Controller {
   
   static targets = ["appendBingoCard", "removeAllBingoCards"]
 
-  newCard() {
-    fetch("/bingo_cards/new", {
-      method: "GET",
+  // How do you pass arguments to a controller method in Stimulus?
+  // https://github.com/hotwired/stimulus/issues/64
+  // Via `event.target.dataset`, you can get data attributes from the DOM element. 
+
+  newCard(event) {
+    const data = event.target.dataset
+    fetch(`/bingo_cards`, {
+      method: "POST",
       headers: {
+        "content-type": "application/json",
         "accept": "text/html"
-    }}).then(res => res.text())
+      },
+      body: JSON.stringify({
+        "bingo_card": { 
+          "bingo_game_id": data.gameId
+        }
+      })
+  }).then(res => res.text())
       .then(html => this.appendToBingoCards(html));
   }
   

@@ -5,12 +5,21 @@ export default class extends Controller {
   
   static targets = ["bingoNumber"]
 
-  click() {
-    console.log("Clicked!")
-    let num = Math.floor(Math.random() * (66-1)) + 1;
-    let letter = this.numberToLetter(num)
-    
-    this.bingoNumberTarget.textContent = letter + num
+  // How do you pass arguments to a controller method in Stimulus?
+  // https://github.com/hotwired/stimulus/issues/64
+
+  newNumber(event) {
+    fetch(`/bingo_games/${event.target.dataset.gameId}/draw_number`, {
+      method: "POST",
+      headers: {
+        "accept": "text/plain"
+      }
+    }).then(res=> res.text())
+    .then(data => this.bingoNumberTarget.textContent = data);
+  }
+
+  resetNumbers(event) {
+    fetch(`/bingo_games/${event.target.dataset.gameId}/reset_numbers`);
   }
 
   numberToLetter(num) {
