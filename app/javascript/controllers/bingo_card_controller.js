@@ -5,12 +5,20 @@ export default class extends Controller {
   
   static targets = ["appendBingoCard", "removeAllBingoCards"]
 
-  newCard() {
-    fetch("/bingo_cards/new", {
-      method: "GET",
+  newCard(event) {
+    const data = event.target.dataset
+    fetch(`/bingo_cards`, {
+      method: "POST",
       headers: {
+        "content-type": "application/json",
         "accept": "text/html"
-    }}).then(res => res.text())
+      },
+      body: JSON.stringify({
+        "bingo_card": { 
+          "bingo_game_id": data.gameId 
+        }
+      })
+  }).then(res => res.text())
       .then(html => this.appendToBingoCards(html));
   }
   

@@ -13,8 +13,8 @@
       <% bingo_card.board_array.each do |row| %>
         <tr>
           <% row.each do |number| %>
-            <td class="text-center">
-              <%= number %>
+            <td class="text-center <%= "bg-success" if @bingo_game.bingo_numbers.include?(number) %>">
+              <%= number.number %>
             </td>
           <% end %>
         </tr>
