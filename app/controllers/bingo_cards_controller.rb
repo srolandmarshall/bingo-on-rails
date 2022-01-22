@@ -1,5 +1,7 @@
 class BingoCardsController < ApplicationController
   before_action :set_bingo_card, only: %i[ show edit update destroy ]
+  skip_before_action :verify_authenticity_token
+
 
   # GET /bingo_cards or /bingo_cards.json
   def index
@@ -62,6 +64,10 @@ class BingoCardsController < ApplicationController
       format.html { redirect_to bingo_cards_url, notice: "Bingo card was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def destroy_all
+    BingoCard.destroy_all
   end
 
   private

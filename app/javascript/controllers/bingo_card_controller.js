@@ -3,9 +3,9 @@ import { application } from "./application"
 
 export default class extends Controller {
   
-  static targets = ["bingoCard"]
+  static targets = ["appendBingoCard", "removeAllBingoCards"]
 
-  click() {
+  newCard() {
     fetch("/bingo_cards/new", {
       method: "GET",
       headers: {
@@ -14,7 +14,17 @@ export default class extends Controller {
       .then(html => this.appendToBingoCards(html));
   }
 
+  removeAllCards() {
+    this.destroyAllCall();
+    this.removeAllBingoCardsTarget.innerHTML = "";
+  }
+
+  destroyAllCall() {
+    fetch("/bingo_cards/destroy_all", {
+      method: "DELETE"});
+  }
+
   appendToBingoCards(card_data) {
-    this.bingoCardTarget.insertAdjacentHTML('beforeend', card_data);
+    this.appendBingoCardTarget.insertAdjacentHTML('beforeend', card_data);
   }
 }

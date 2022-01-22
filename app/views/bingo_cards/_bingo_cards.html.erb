@@ -3,13 +3,14 @@
 <h1>Bingo cards</h1>
 
 <div data-controller="bingo-card" id="bingo_cards">
-  <div data-bingo-card-target="bingoCard" class="row">
+  <div data-bingo-card-target="appendBingoCard removeAllBingoCards" class="row">
   <% BingoCard.all.each do |bingo_card| %>
     <%= render bingo_card %>
   <% end %>
   </div>
-  <button class="btn btn-success" data-action="bingo-card#click">
+  <button class="btn btn-success" data-action="bingo-card#newCard">
     New Bingo Card
   </button>
+  <button class="btn btn-danger" data-action="bingo-card#removeAllCards">Remove All</button>
 </div>
 
