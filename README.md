@@ -1,24 +1,13 @@
-# README
+# Bingo on Rails
+A hacky demo for Stimulus in Rails 7.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Quick Start Guide
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+0. Install Ruby ≥ 3.0.0
+1. Fork this and `git clone` it
+2. `cd bingo-on-rails`
+3. `bundle install && yarn install`
+   1. If there are problems here reach out to me on Slack
+4. `rake db:create` (requires psql setup)
+5. `rake db:migrate`
+6. `rails css:install:bootstrap` (Rails 7!)
