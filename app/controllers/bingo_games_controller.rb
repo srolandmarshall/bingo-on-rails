@@ -1,5 +1,7 @@
 class BingoGamesController < ApplicationController
-  before_action :set_bingo_game, only: %i[ show edit update destroy ]
+  before_action :set_bingo_game, only: %i[ show edit update destroy draw_number ]
+  skip_before_action :verify_authenticity_token
+
 
   # GET /bingo_games or /bingo_games.json
   def index
@@ -8,6 +10,7 @@ class BingoGamesController < ApplicationController
 
   # GET /bingo_games/1 or /bingo_games/1.json
   def show
+    @bingo_cards = @bingo_game.bingo_cards
   end
 
   # GET /bingo_games/new
@@ -55,6 +58,13 @@ class BingoGamesController < ApplicationController
       format.html { redirect_to bingo_games_url, notice: "Bingo game was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  # POST /bingo_games/1/draw_number
+  def draw_number
+    number = @bingo_game.draw_number
+    response = number ? number.display : "No more numbers available"
+    render plain: response
   end
 
   private

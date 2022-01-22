@@ -1,6 +1,8 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @bingo_game %>
+<%= render "number_picker" %>
+<%= render "bingo_cards/bingo_cards" %>
 
 <div>
   <%= link_to "Edit this bingo game", edit_bingo_game_path(@bingo_game) %> |
