@@ -1,4 +1,5 @@
-# Pin npm packages by running ./bin/importmap
+# Pin npm packages by running:
+# ./bin/importmap pin <package>
 
 pin "application", preload: true
 pin "@hotwired/turbo-rails", to: "turbo.js"
