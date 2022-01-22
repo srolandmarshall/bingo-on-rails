@@ -2,11 +2,13 @@
 
 <h1>Bingo cards</h1>
 
-<div id="bingo_cards">
+<div data-controller="bingo-card" id="bingo_cards">
   <div class="row">
   <% BingoCard.all.each do |bingo_card| %>
     <%= render bingo_card %>
   <% end %>
+  <button class="btn btn-success" data-action="bingo-card#click">
+    New Bingo Card
+  </button>
 </div>
 
-<%= link_to "New bingo card", new_bingo_card_path %>

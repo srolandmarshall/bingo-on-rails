@@ -7,7 +7,6 @@ class BingoCard < ApplicationRecord
         number.bingo_cards << self
       end
     end
-    self.save!
   end
 
   def board_array
@@ -22,4 +21,7 @@ class BingoCard < ApplicationRecord
     arr
   end
 
+  def board_array_json
+    { "board": board_array }
+  end
 end

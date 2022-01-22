@@ -14,21 +14,25 @@ class BingoCardsController < ApplicationController
   def new
     @bingo_card = BingoCard.new
     @bingo_card.pick_numbers
-    redirect_to bingo_cards_path, notice: "Bingo card was successfully created."
+    @data = @bingo_card.attributes.merge(@bingo_card.board_array_json)
+    puts @data.to_json
+    respond_to do |format|
+      format.html
+      format.json { render json: @data.to_json }
+    end
   end
 
   # GET /bingo_cards/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /bingo_cards or /bingo_cards.json
   def create
-    @bingo_card = BingoCard.new(bingo_card_params)
-
+    @bingo_card = BingoCard.new
+    @bingo_card.pick_numbers
     respond_to do |format|
       if @bingo_card.save
-        format.html { redirect_to bingo_card_url(@bingo_card), notice: "Bingo card was successfully created." }
-        format.json { render :show, status: :created, location: @bingo_card }
+        format.html { redirect_to bingo_cards_path, notice: "Bingo card was successfully created." }
+        format.json { render json: @bingo_card }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @bingo_card.errors, status: :unprocessable_entity }
@@ -67,6 +71,6 @@ class BingoCardsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def bingo_card_params
-      params.require(:bingo_card).permit(:winner, :number_id)
+      params.require(:bingo_card).permit(:winner, :number_ids)
     end
 end
