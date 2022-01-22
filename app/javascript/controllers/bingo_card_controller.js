@@ -13,6 +13,10 @@ export default class extends Controller {
     }}).then(res => res.text())
       .then(html => this.appendToBingoCards(html));
   }
+  
+  appendToBingoCards(card_data) {
+    this.appendBingoCardTarget.insertAdjacentHTML('beforeend', card_data);
+  }
 
   removeAllCards() {
     this.destroyAllCall();
@@ -21,10 +25,8 @@ export default class extends Controller {
 
   destroyAllCall() {
     fetch("/bingo_cards/destroy_all", {
-      method: "DELETE"});
+      method: "DELETE"
+    });
   }
 
-  appendToBingoCards(card_data) {
-    this.appendBingoCardTarget.insertAdjacentHTML('beforeend', card_data);
-  }
 }
